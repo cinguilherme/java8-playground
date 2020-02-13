@@ -6,7 +6,7 @@ public class StrategyFactory {
 
     public static Optional<Strategy> getStrategy(String message) {
 
-        if(message.equals("simple")){
+        if (message.equals("simple")) {
             return Optional.of(new SimpleStrategy());
         }
         return Optional.empty();

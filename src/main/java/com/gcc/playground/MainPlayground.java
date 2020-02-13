@@ -1,6 +1,6 @@
 package com.gcc.playground;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class MainPlayground {
@@ -9,22 +9,20 @@ public class MainPlayground {
 
         System.out.println(" testing ");
 
-        String not_found = getProcessResult("not found");
+        String not_found = getProcessResultAsString("not found");
 
-        String result = getProcessResult("simple");
+        String result = getProcessResultAsString("simple");
 
         System.out.println(not_found);
         System.out.println(result);
 
     }
 
-    private static String getProcessResult(String key) {
+    private static String getProcessResultAsString(String key) {
+        Map<String, String> map = HashService.getMap();
+
         return StrategyFactory.getStrategy(key)
-                .map(s -> {
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("one", "1");
-                    return s.process(map);
-                })
+                .map(s -> s.process(map))
                 .map(Supplier::get).toString();
     }
 
