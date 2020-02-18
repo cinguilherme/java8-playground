@@ -12,13 +12,11 @@ public class Compositor {
 
     public Double calculateFinalCost(Integer val, Double discount) {
         Function<Double, Double> tConsumer = (y) -> applyDiscountIfAany.apply(y, discount);
-        Double prefilan = addTax.andThen(deductPostMan)
+        return addTax.andThen(deductPostMan)
                 .andThen(applyGovTax)
                 .andThen(tConsumer)
                 .apply(val);
 
-
-        return applyDiscountIfAany.apply(prefilan, 20D);
 
     }
 
